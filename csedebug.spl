@@ -1,0 +1,31 @@
+main
+array[5] x, z;
+var a, b, c, d, e, f, g;
+{
+	let d <- 4;
+	let b <- 0;
+	let c <- 1;
+	
+	
+	let a <- b + c;
+	let d <- b + c;
+	let e <- c + b + d;
+	
+	let sum <- e + 4 * b ;
+	
+	if a != d then
+		let e <- c + b + d;
+		let f <- a * d;
+		let g <- d * a + 4;
+	
+		let e <- c + b + d
+	else
+		let f <- a / d;
+		let g <- d / a
+	fi;
+	
+	let f <- a * d;
+	let g <- d / a;
+	
+	call OutputNum(d)
+}.

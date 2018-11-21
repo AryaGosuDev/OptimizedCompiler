@@ -1,0 +1,12 @@
+digraph G { 
+node [shape = record];
+node0 [label="{bbval : a 1|0 : MOVE 1000 a_1 KILLED 0|0 : MOVEREG (5) 1000}"];
+node1 [label="{bbval : a 1|5 : PHI a_3 1000 (3)|1 : CMP (5) 5|2 : BLE (1)  [3]}"];
+node2 [label="{bbval : a 2|3 : SUB (5) 1|4 : MOVE (3) a_2 KILLED 0|0 : MOVEREG (5) (3)|6 : BSR [1]}"];
+node3 [label="{bbval : a 3|7 : WRD (5)}"];
+
+node0 -> node1;
+node1 -> node3;
+node1 -> node2;
+node2 -> node1;
+}

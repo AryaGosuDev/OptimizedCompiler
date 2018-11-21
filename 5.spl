@@ -1,0 +1,30 @@
+main 
+var f, g, n;
+{
+	
+	let n <- 2;
+	let f <- 10;
+	while n > 1 do
+		
+		let f <- 4;
+		if n < 0 then
+			let n <- 3 * f;
+			
+			let f <- n * 3;
+			let f <- n * f
+		fi;
+		
+		
+		
+		let n <- n - 1;
+		let f <- 4
+	od;
+	
+	let n <- f * n;
+	let f <- f * n ;
+	let n <- f ;
+	
+	call OutputNum ( n)
+	
+	
+}.

@@ -1,0 +1,129 @@
+Assignment 4 Important Notes
+
+----------------------------------------------------------------------
+
+Files:
+
+IMPORTANT_NOTES.txt  - This file
+Wrapper.dll          - The library file that holds the public routines 
+                       which converts your output into assembly file 
+                       form.
+Driver.cs            - The driver source file that directs the rest of
+                       the compiler. You will NOT need to modify this.  
+ParserSkeleton.cs    - same as before
+Scanner.cs           - Same file as before; you WILL need to modify this
+                       file to accept the new grammar (a new token -- 
+                       "arrToken" now is introduced).
+ParserException.cs   - same as before
+FileReader.cs	     - same as before
+Example.cs           - An example file showing basic usage of Wrapper 
+                       routines. We HIGHLY RECOMMEND you have a look.
+----------------------------------------------------------------------
+
+Notes and Conventions:
+
+1. Feel free to use your own previous parser, scanner, and filereader, but 
+   heed the conventions set forth in this document.
+
+2. Note the grammar we use in Assignment4 is again different than what we 
+   used in previous assignments. In this assignment handling of procedure 
+   declarations and array types also are required. Please refer to the 
+   attached EBNF is the definitive guide.
+
+   IMPORTANT: 
+   1) Implicit restrictions to the grammar are as follows: 
+      - The array index follows C convention, starting from index 0 to num-1. 
+      - No assignment to array variable is allowed. You can only assign
+        a scalar value to an element of an array.
+      - Arrays will not appear as proc/func parameters or return values. 
+   2) There are two minor corrections to the published EBNF:
+        
+      i) funcBody = { varDecl } "{" [ statSequence ] "}".
+      ii)computation = "simpl" { varDecl } { funcDecl } "{" statSequence "}" ".".
+
+   3) Variable scope: Variables declared at the top level are not 
+      visible in the embedded functions/procedures.
+
+3. The wrapper methods will be called from the Parser, you will not need to
+   modify Driver.cs.
+
+4. The wrapper methods that you will use for this assignment are:
+
+ ** public void insertMain(string[] code,    // string array of instructions
+                           int localVarNum,  // number of local variables
+                           int[] oneDimArrays, // information on array variables
+                           int maxStackNum); // max. stack length (a good number: 32)
+ 
+    - The integer array oneDimArrays holds the sizes of all array variables. For 
+    example, if your array variables are a[10] and a2[4][20], oneDimArrays would
+    hold two entries, oneDimArrays[0] = 10 and oneDimArrays[1] = 80.
+
+    - The local variable number for arrays start from the end of the scalar 
+      variables. If you have 2 arrays and 4 scalars, the arrays are local variables
+      4 qand 5, NO MATTER WHAT THE DECLARATION ORDER IS.
+
+    
+ ** public void insertProcedure(string procedureName, // name of procedure
+                                bool returnsVal,    // true if procedure returns (scalar) value
+                                int argNum,         // number of arguments
+                                string[] code,      // same as insertMain 
+                                int localVarNum,    // same as insertMain
+                                int[] oneDimArrays, // same as insertMain
+                                int maxStackNum);   // same as insertMain
+
+    - This is almost exactly the same as insertMain, except that you have to 
+    enter the additional information of procedure name, if it returns a value,
+    and the number of arguments ({"Main", false, 0} for main). 
+
+
+ ** public string getProcedureCall(string procName, returnsVal, argNum);
+  
+    - Same as in assignment3.  You will use this to call declared methods as well as 
+      the predefined ones.
+
+
+ ** public void WriteFile(string fileName); 
+    
+    - Same as in assignment3. Called inside Parser.computation(), at the end.
+
+
+5. Instructions the you will need to use in assignment 4 (that you didn't need to in 
+   assignment 3):
+
+   instruction    description                      stack transition
+   -----------------------------------------------------------------------------
+   ldelem.i4      push array element to stack      ..,localVarNum,idx     -> ..,elemVal 
+   stelem.i4      store value to array element     ..,localVarNum,idx,val -> ..,   
+   ldarg n        push n'th proc. arg to stack     ..,                    -> ..,argN  
+
+
+6. Instead of filling a skeleton method that is provided, you will need to add the 
+   method to parse procedure declarations yourself to the Parser.cs file.
+
+7. Your program must be compilable via the command 
+   "mcs FileReader.cs Scanner.cs Driver.cs Parser*.cs /r:Wrapper.dll /t:exe 
+    /out:A4.exe" (the output file name is not forced, we'll just refer to 
+    it as A4.exe in this document).
+
+8. To obtain output from your program, you must enter
+   "mono A4.exe <n>", where <n> is a test case number, for example
+   "mono A4.exe 1". This creates a .Net assembly file called "1.asm".
+
+9. To compile the assembly file use the "ilasm" assembler, it should be 
+   included  by default in both Mono and MS .Net ("ilasm.exe" under Windows), development 
+   platforms. The command "ilasm 2.asm" creates an executable called "2.exe", 
+   which you can then run with "mono 2.exe", or "mono 2.exe < tests/2.in" if an input 
+   file is specified in the tests/ directory. 
+
+10. We will test your program by running "mono A4.exe <n>" for each 
+   testcase n and checking the output against the correct output, 
+   supplied in tests/ directory. This is also how you can test your programs.
+   
+11. Your compiler should not print anything to the standard output (e.g. via
+   Console.WriteLine).
+
+12. Feel free to write simple C# programs and use the disassembler ("monodis" 
+   under Mono) to look at assembly listing examples.
+
+13. The electronic/hardcopy submission will include both Scanner.cs
+   and Parser.cs.

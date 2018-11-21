@@ -1,0 +1,26 @@
+main 
+var f, g, n;
+{
+	let i <- 1;
+	let j <- 1;
+	let k <- 1;
+	let l <- 2;
+	
+	while i < 10 do
+	
+		let i <- i + 1;
+		
+		while i < 20 do
+		
+			let i <- i + 1 ;
+			
+			while i < 30 do
+			
+				let i <- i + 1 ;
+				
+				call OutputNum ( i )
+				
+			od	
+		od	
+	od
+}.

@@ -1,0 +1,17 @@
+main
+var i, j;
+{
+	let i <- 0;
+	let j <-0;
+
+	while i < 10 do 
+		let j <- 7;
+		let j <- j + 7;
+		
+		call OutputNum(j);
+		call OutputNum(i);
+		let i <- i + 1
+		
+		
+	od
+}.

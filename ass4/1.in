@@ -1,0 +1,14 @@
+--simpl var a, d, xc;
+arr[2] b, c;
+
+
+
+
+
+
+{
+	let b[1] <- 5;
+	
+	call outputnum(b[1])
+	
+}.

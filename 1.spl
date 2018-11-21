@@ -1,0 +1,30 @@
+main
+var a, b, c;
+{
+	let a <- 1;
+	let b <- 2;
+	let c <- 3;
+	if (a+1) > b then
+		let a <- a + 1;
+		let c <- 4;
+		while (c+1) > 5 do
+			let a <- b + c;
+			let b <- 1
+			
+		od;
+		let a <- a * b
+	else
+		
+		if a < b then
+			let a <- a * 4
+			
+			
+		else 
+			let a <- a * 4
+				
+			
+		fi
+	fi;
+	let a <- a + 1;
+	call OutputNum(a)
+}.

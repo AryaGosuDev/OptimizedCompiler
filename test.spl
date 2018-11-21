@@ -1,0 +1,53 @@
+main
+var i, j, k, sum, inout;
+
+{
+	let inout <- 4;
+	
+	let i <- 0;
+	while i < 5 do
+		let j <- 0;
+		
+		while j < 5 do
+				let j <- j + 1
+		od;
+		let i <- i + 1
+	od;
+	
+	
+	let i <- 0;
+	while i < 5 do
+		let k <- 0;
+		while k < 5 do
+			let sum <- 0;
+			let j <- 0;
+			while j < 5 do
+				let sum1 <- sum + 4 * i;
+				let j <- j + 1;
+				while j > 5 do
+					let sum2 <- 2 +(sum + 4 * i);
+					let j <- j + 1
+				od
+			od;
+			let i <- sum;
+			let k <- k + 1
+		od;
+		let i <- i + 1
+	od;
+	
+	
+	let i <- 0;
+	while i < 5 do
+			let j <- 0;	
+		while j < 5 do
+			call OutputNum(i);
+			call OutputNum(j);
+			call OutputNum(i);
+			call OutputNewLine;
+	
+			let j <- j + 1
+		od;
+		let i <- i + 1
+	od;
+	call OutputNum(inout)
+}.
